@@ -22,9 +22,13 @@ class Await extends Component {
       )
     }
 
-    const promise = isPromise(props.for)
-      ? props.for
-      : warn(true, 'Await#for must be a Promise. An empty promise was used instead of your prop') || Promise.resolve()
+    if (!promise) {
+      return this.setState({
+        done: true,
+        resolve: null,
+        reject: null,
+      })
+    }
 
     promise.then(
       res => {
