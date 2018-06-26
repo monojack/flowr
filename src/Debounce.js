@@ -1,19 +1,12 @@
 import { Component, } from 'react'
-
 class Debounce extends Component {
-  constructor () {
-    super()
-    this.canUpdate = false
-  }
   componentDidMount () {
-    this.debounce()
+    this.canUpdate = !this.props.immediate
   }
 
   shouldComponentUpdate () {
     this.canUpdate = false
-
     this.debounce()
-
     return this.canUpdate
   }
 
