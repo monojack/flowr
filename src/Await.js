@@ -3,18 +3,29 @@ import { Component, } from 'react'
 import { isFunction, isPromise, warn, } from './utils'
 
 class Await extends Component {
-  constructor (props) {
-    super(props)
-    this.state = { done: false, resolve: null, reject: null, }
+  componentDidMount () {
+    this.done = false
+    this.request(this.props)
+  }
 
-    const { tap = () => {}, onPromise = () => {}, } = props
+  componentWillReceiveProps (nextProps) {
+    this.done = false
+    this.request(nextProps)
+  }
+
+  ongoing = null
+  done = false
+  state = { resolve: null, reject: null, }
+
+  request = props => {
+    const { 'for': forProp, tap = () => {}, onPromise = () => {}, } = props
 
     let promise
-    if (isFunction(props.for)) {
-      promise = props.for()
+    if (isFunction(forProp)) {
+      promise = forProp()
       onPromise(promise)
-    } else if (isPromise(props.for)) {
-      promise = props.for
+    } else if (isPromise(forProp)) {
+      promise = forProp
     } else {
       warn(
         true,
@@ -23,39 +34,49 @@ class Await extends Component {
     }
 
     if (!promise) {
+      this.done = true
       return this.setState({
-        done: true,
         resolve: null,
         reject: null,
       })
     }
 
+    this.ongoing = promise
     promise.then(
       res => {
+        if (this.ongoing !== promise) return
+        this.done = true
         tap(null, res)
         this.setState({
           done: true,
           resolve: res,
         })
+        this.ongoing = null
       },
       err => {
+        if (this.ongoing !== promise) return
+        this.done = true
+        tap(err, null)
         this.setState({
           done: true,
           reject: err,
         })
-        tap(err, null)
+        this.ongoing = null
       }
     )
   }
 
   render () {
-    const { children, } = this.props
-    const { done, resolve, reject, } = this.state
+    const { children, 'for': forProp, } = this.props
+    const { resolve, reject, } = this.state
 
-    if (typeof children === 'function') {
-      return done ? children(reject, resolve) : null
+    if (!this.done) return null
+
+    if (isFunction(children)) {
+      return forProp ? children(reject, resolve) : null
+    } else if (isPromise(children)) {
+      return reject == null ? this.props.children : null
     }
-    return done && reject == null ? this.props.children : null
   }
 }
 
