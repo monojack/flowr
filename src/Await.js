@@ -7,7 +7,7 @@ class Await extends Component {
     super(props)
     this.state = { done: false, resolve: null, reject: null, }
 
-    const { debug = () => {}, } = props
+    const { tap = () => {}, } = props
 
     const promise = isPromise(props.for)
       ? props.for
@@ -15,7 +15,7 @@ class Await extends Component {
 
     promise.then(
       res => {
-        debug('Await resolved with response:', res)
+        tap(null, res)
         this.setState({
           done: true,
           resolve: res,
@@ -26,7 +26,7 @@ class Await extends Component {
           done: true,
           reject: err,
         })
-        debug('Await rejected with error:', err)
+        tap(err, null)
       }
     )
   }
