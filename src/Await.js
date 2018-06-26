@@ -1,13 +1,26 @@
 import { Component, } from 'react'
 
-import { isPromise, warn, } from './utils'
+import { isFunction, isPromise, warn, } from './utils'
 
 class Await extends Component {
   constructor (props) {
     super(props)
     this.state = { done: false, resolve: null, reject: null, }
 
-    const { tap = () => {}, } = props
+    const { tap = () => {}, onPromise = () => {}, } = props
+
+    let promise
+    if (isFunction(props.for)) {
+      promise = props.for()
+      onPromise(promise)
+    } else if (isPromise(props.for)) {
+      promise = props.for
+    } else {
+      warn(
+        true,
+        'Await#for must be a Promise or a function that returns one. There is nothing to "wait for" so the children will be rendered immediately'
+      )
+    }
 
     const promise = isPromise(props.for)
       ? props.for

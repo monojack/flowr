@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 const { NODE_ENV, } = (process || {}).env || {}
 
-function isFunction (fn) {
+export function isFunction (fn) {
   return typeof fn === 'function'
 }
 
