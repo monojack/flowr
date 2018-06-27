@@ -1,5 +1,6 @@
 {
   "presets": [
+    "react",
     [
       "env",
       {
@@ -10,7 +11,7 @@
       }
     ]
   ],
-  "plugins": ["transform-class-properties"],
+  "plugins": ["transform-class-properties", "transform-object-rest-spread"],
   "env": {
     "cjs": {
       "plugins": [["transform-es2015-modules-commonjs", { "loose": true }]]
