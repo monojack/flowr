@@ -1,13 +1,47 @@
 import { Component, } from 'react'
+import { number, bool, node, } from 'prop-types'
+
+/**
+ * - = 100ms
+ * props:       a--b--c--d----------e--f--g----h---i-----|
+ *
+ *                             time: 500
+ *                             immediate: false
+ * canUpdate:   T--F--F--F----T-----F--F--F----F---F----T|
+ * forceUpdate: --------------T-------------------------T|
+ * render:      a-------------d-------------------------i|
+ *
+ *                             time: 500
+ *                             immediate: true
+ * canUpdate:   F--F--F--F----T-----F--F--F----F---F----T|
+ * forceUpdate: --------------T-------------------------T|
+ * render:      --------------d-------------------------i|
+ */
+
 class Debounce extends Component {
-  componentDidMount () {
+  static propTypes = {
+    time: number,
+    immediate: bool,
+    children: node,
+  }
+
+  static defaultProps: {
+    immediate: false,
+  }
+
+  constructor (props) {
+    super(props)
+
     this.canUpdate = !this.props.immediate
   }
 
-  shouldComponentUpdate () {
+  componentWillReceiveProps () {
     this.canUpdate = false
     this.debounce()
-    return this.canUpdate
+  }
+
+  shouldComponentUpdate () {
+    return false
   }
 
   componentWillUnmount () {
