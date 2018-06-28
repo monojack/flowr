@@ -1,4 +1,6 @@
 import React, { Component, } from 'react'
+import { func, } from 'prop-types'
+
 import { Subject, } from './utils'
 
 class StreamRenderer extends Component {
@@ -39,6 +41,10 @@ class StreamRenderer extends Component {
   render () {
     return this.state.vdom
   }
+}
+
+StreamRenderer.propTypes = {
+  render: func,
 }
 
 const Stream = ({ children, ...props }) => <StreamRenderer {...{ ...props, }} render={children} />

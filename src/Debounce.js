@@ -19,16 +19,6 @@ import { number, bool, node, } from 'prop-types'
  */
 
 class Debounce extends Component {
-  static propTypes = {
-    time: number,
-    immediate: bool,
-    children: node,
-  }
-
-  static defaultProps: {
-    immediate: false,
-  }
-
   constructor (props) {
     super(props)
 
@@ -65,6 +55,16 @@ class Debounce extends Component {
   render () {
     return this.canUpdate ? this.props.children : null
   }
+}
+
+Debounce.propTypes = {
+  time: number,
+  immediate: bool,
+  children: node,
+}
+
+Debounce.defaultProps = {
+  immediate: false,
 }
 
 export default Debounce

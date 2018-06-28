@@ -1,6 +1,9 @@
 {
   "extends": ["react", "plugin:react/recommended", "mono"],
   "rules": {
-    "react/no-deprecated": "off"
+    "react/no-deprecated": "off",
+    "react/prop-types": ["error", {
+      "ignore": [ "children" ]
+    }]
   }
 }

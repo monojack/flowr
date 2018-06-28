@@ -10,7 +10,6 @@ class Pure extends Component {
   }
 
   render () {
-    console.log(this.props)
     return this.props.children
   }
 }

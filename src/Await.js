@@ -4,13 +4,6 @@ import { func, node, oneOfType, instanceOf, } from 'prop-types'
 import { isFunction, isPromise, warn, } from './utils'
 
 class Await extends Component {
-  static propTypes = {
-    'for': oneOfType([ func, instanceOf(Promise), ]),
-    children: oneOfType([ node, func, ]),
-    tap: func,
-    onPromise: func,
-  }
-
   componentDidMount () {
     this.done = false
     this.request(this.props)
@@ -87,6 +80,13 @@ class Await extends Component {
       return reject == null ? children : null
     }
   }
+}
+
+Await.propTypes = {
+  'for': oneOfType([ func, instanceOf(Promise), ]),
+  children: oneOfType([ node, func, ]),
+  tap: func,
+  onPromise: func,
 }
 
 export default Await

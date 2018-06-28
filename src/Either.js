@@ -1,4 +1,6 @@
 import { Children, } from 'react'
+import { bool, node, } from 'prop-types'
+
 import { warn, } from './utils'
 
 const Either = ({ when, children, }) => {
@@ -11,6 +13,11 @@ const Either = ({ when, children, }) => {
 
   const [ left = null, right = null, ] = Children.toArray(children)
   return when ? left : right
+}
+
+Either.propTypes = {
+  when: bool,
+  children: node,
 }
 
 export default Either

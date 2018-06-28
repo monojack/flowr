@@ -1,4 +1,5 @@
 import { Children, } from 'react'
+import { number, arrayOf, } from 'prop-types'
 
 const Order = ({ sort, children, }) => {
   const c = Children.toArray(children)
@@ -9,6 +10,10 @@ const Order = ({ sort, children, }) => {
       return acc
     }, [])
     : children
+}
+
+Order.propTypes = {
+  sort: arrayOf(number),
 }
 
 export default Order

@@ -11,11 +11,6 @@ import { number, node, } from 'prop-types'
  */
 
 class Throttle extends Component {
-  static propTypes = {
-    time: number,
-    children: node,
-  }
-
   componentDidMount () {
     this.hasNewProps = false
     this.startSampling(this.props)
@@ -67,6 +62,11 @@ class Throttle extends Component {
   render () {
     return this.props.children
   }
+}
+
+Throttle.propTypes = {
+  time: number,
+  children: node,
 }
 
 export default Throttle

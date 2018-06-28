@@ -1,4 +1,5 @@
 import { Children, } from 'react'
+import { bool, node, } from 'prop-types'
 
 const Flip = ({ when, children, }) => {
   const c = Children.toArray(children)
@@ -9,6 +10,11 @@ const Flip = ({ when, children, }) => {
       .reverse()
       .concat(c.slice(2))
     : children
+}
+
+Flip.propTypes = {
+  when: bool,
+  children: node,
 }
 
 export default Flip

@@ -1,4 +1,5 @@
 import { Component, } from 'react'
+import { number, node, } from 'prop-types'
 
 class Delay extends Component {
   constructor () {
@@ -20,6 +21,11 @@ class Delay extends Component {
   render () {
     return this.canUpdate ? this.props.children : null
   }
+}
+
+Delay.propTypes = {
+  time: number,
+  children: node,
 }
 
 export default Delay
