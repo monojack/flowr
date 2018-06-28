@@ -75,7 +75,7 @@ class Await extends Component {
     if (isFunction(children)) {
       return forProp ? children(reject, resolve) : null
     } else if (isPromise(children)) {
-      return reject == null ? this.props.children : null
+      return reject == null ? children : null
     }
   }
 }
