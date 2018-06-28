@@ -1,8 +1,16 @@
 import { Component, } from 'react'
+import { func, node, oneOfType, instanceOf, } from 'prop-types'
 
 import { isFunction, isPromise, warn, } from './utils'
 
 class Await extends Component {
+  static propTypes = {
+    'for': oneOfType([ func, instanceOf(Promise), ]),
+    children: oneOfType([ node, func, ]),
+    tap: func,
+    onPromise: func,
+  }
+
   componentDidMount () {
     this.done = false
     this.request(this.props)
