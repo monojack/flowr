@@ -18,7 +18,7 @@ class Await extends Component {
   state = { resolve: null, reject: null, }
 
   request = props => {
-    const { 'for': forProp, tap = () => {}, onPromise = () => {}, } = props
+    const { 'for': forProp, onPromise = () => {}, } = props
 
     let promise
     if (isFunction(forProp)) {
@@ -29,7 +29,8 @@ class Await extends Component {
     } else {
       warn(
         true,
-        'Await#for must be a Promise or a function that returns one. There is nothing to "wait for" so the children will be rendered immediately'
+        `Await#for must be a Promise or a function that returns one.
+        There is nothing to "wait for" so the children will be rendered immediately`
       )
     }
 
@@ -45,25 +46,25 @@ class Await extends Component {
     promise.then(
       res => {
         if (this.ongoing !== promise) return
-        this.done = true
-        tap(null, res)
-        this.setState({
-          done: true,
-          resolve: res,
-        })
-        this.ongoing = null
+        this.update(null, res)
       },
       err => {
         if (this.ongoing !== promise) return
-        this.done = true
-        tap(err, null)
-        this.setState({
-          done: true,
-          reject: err,
-        })
-        this.ongoing = null
+        this.update(err, null)
       }
     )
+  }
+
+  update = (reject, resolve) => {
+    const { tap = () => {}, } = this.props
+    this.done = true
+    tap(reject, resolve)
+    this.setState({
+      done: true,
+      resolve,
+      reject,
+    })
+    this.ongoing = null
   }
 
   render () {
