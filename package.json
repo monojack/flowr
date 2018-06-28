@@ -1,6 +1,6 @@
 {
   "name": "flowr",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "declarative flow control components for React applications",
   "module": "es/index.js",
   "main": "cjs/index.js",
