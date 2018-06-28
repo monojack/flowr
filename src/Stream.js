@@ -29,7 +29,7 @@ class StreamRenderer extends Component {
 
   componentWillUnmount () {
     this.subscription && this.subscription.unsubscribe()
-    this.unsubscribed = false
+    this.unsubscribed = true
   }
 
   state = { vdom: null, }
