@@ -2,7 +2,7 @@ import { bool, } from 'prop-types'
 
 import { Children, } from 'react'
 
-const Reverse = ({ when, children = null, }) => {
+const Reverse = ({ when = true, children = null, }) => {
   return when ? Children.toArray(children).reverse() : children
 }
 

@@ -1,7 +1,7 @@
 import { Children, } from 'react'
 import { bool, node, } from 'prop-types'
 
-const Flip = ({ when, children, }) => {
+const Flip = ({ when = true, children, }) => {
   const c = Children.toArray(children)
 
   return when
