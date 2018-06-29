@@ -1,0 +1,27 @@
+---
+title: "Examples"
+description: "Examples of common features, built with flowr components."
+---
+
+{namespace pageExamplesIndex}
+
+/**
+ */
+{template .render}
+	{call main.render data="all"}
+		{param content kind="html"}
+			{call .header data="all" /}
+		{/param}
+	{/call}
+{/template}
+
+/**
+ */
+{template .header}
+	<header class="header">
+		<div class="container">
+			<h1 class="header-title">Examples</h1>
+			<h2 class="header-subtitle">work in progress...</h2>
+		</div>
+	</header>
+{/template}

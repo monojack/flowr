@@ -1,10 +1,14 @@
-# Flowr
+---
+title: "Getting started"
+description: "Get started with Flowr"
+layout: "guide"
+icon: "arrow-right-rod"
+weight: 1
+---
 
-[![Build Status](https://travis-ci.org/monojack/flowr.svg?branch=master)](https://travis-ci.org/monojack/flowr)
-[![npm version](https://img.shields.io/npm/v/flowr.svg)](https://www.npmjs.com/package/flowr)
-[![npm downloads](https://img.shields.io/npm/dm/flowr.svg)](https://www.npmjs.com/package/flowr)
+###### {$page.description}
 
-**Flowr** provides a set of useful _React_ components for controlling your render flow.
+<article id="Installation">
 
 ## Installation
 
@@ -17,15 +21,17 @@ npm install flowr -S
 This will download `flowr` into your `node_modules` folder and then you can import any `flowr` component into your modules.
 
 ```javascript
-import { Maybe, Either, Await } from 'flowr'
+import { Maybe, Either, Await } from 'flowr';
 // ...
 ```
 
 `Flowr` is _tree-shaking_ friendly. As long as you are using ES6 modules, your bundle will contain only the required `flowr` components. Read more about [tree shaking](https://webpack.js.org/guides/tree-shaking/)
 
-There are two categories of Components available: [Conditionals](#conditionals) and [Schedulers](#schedulers)
+There are two categories of Components available: [**Conditionals**](#conditionals) and [**Schedulers**](#schedulers)
 
-[**Read the docs**](https://monojack.github.io/flowr)
+</article>
+
+<article id="conditionals">
 
 #### Conditionals
 
@@ -43,17 +49,9 @@ There are two categories of Components available: [Conditionals](#conditionals) 
 | [`Just`][just]         | `*`    | Just renders it's children, nothing special, good for dynamic rendering                               |
 | [`Nothing`][nothing]   | `*`    | Renders nothing                                                                                       |
 
-[maybe]: https://monojack.github.io/flowr/docs/conditionals/Maybe.html
-[either]: https://monojack.github.io/flowr/docs/conditionals/Either.html
-[flip]: https://monojack.github.io/flowr/docs/conditionals/Flip.html
-[reverse]: https://monojack.github.io/flowr/docs/conditionals/Reverse.html
-[order]: https://monojack.github.io/flowr/docs/conditionals/Order.html
-[one]: https://monojack.github.io/flowr/docs/conditionals/One.html
-[some]: https://monojack.github.io/flowr/docs/conditionals/Some.html
-[constant]: https://monojack.github.io/flowr/docs/conditionals/Constant.html
-[pure]: https://monojack.github.io/flowr/docs/conditionals/Pure.html
-[just]: https://monojack.github.io/flowr/docs/conditionals/Just.html
-[nothing]: https://monojack.github.io/flowr/docs/conditionals/Nothing.html
+</article>
+
+<article id="schedulers">
 
 #### Schedulers
 
@@ -67,8 +65,19 @@ There are two categories of Components available: [Conditionals](#conditionals) 
 
 </article>
 
-[await]: https://monojack.github.io/flowr/docs/schedulers/Await.html
-[stream]: https://monojack.github.io/flowr/docs/schedulers/Stream.html
-[debounce]: https://monojack.github.io/flowr/docs/schedulers/Debounce.html
-[delay]: https://monojack.github.io/flowr/docs/schedulers/Delay.html
-[throttle]: https://monojack.github.io/flowr/docs/schedulers/Throttle.html
+[maybe]: conditionals/Maybe.html
+[either]: conditionals/Either.html
+[flip]: conditionals/Flip.html
+[reverse]: conditionals/Reverse.html
+[order]: conditionals/Order.html
+[one]: conditionals/One.html
+[some]: conditionals/Some.html
+[constant]: conditionals/Constant.html
+[pure]: conditionals/Pure.html
+[just]: conditionals/Just.html
+[nothing]: conditionals/Nothing.html
+[await]: schedulers/Await.html
+[stream]: schedulers/Stream.html
+[debounce]: schedulers/Debounce.html
+[delay]: schedulers/Delay.html
+[throttle]: schedulers/Throttle.html

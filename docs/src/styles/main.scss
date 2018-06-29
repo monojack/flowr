@@ -1,0 +1,62 @@
+$accent: #3498db;
+
+@import 'marble';
+
+// Root
+@import 'templates/root';
+
+// Landing
+@import 'templates/landing';
+
+// Docs
+@import 'templates/docs';
+
+// Search
+@import 'templates/search';
+
+// Updates
+@import 'templates/updates';
+
+// Blog
+@import 'templates/blog';
+
+// Tutorial
+@import 'templates/tutorial';
+
+.main-page-content {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 60px);
+  justify-content: space-between;
+  position: relative;
+
+  > article {
+    padding: 60px 0;
+  }
+}
+
+.topbar-logo-icon {
+  transform: scale(0.8);
+}
+
+.flowr-logo::after {
+  content: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 6.35 6.35'%3E%3Cpath fill='#3498db' d='M3.4726 2.694h.9622v.962h-.9622zm1.3861 0h.9621v.962h-.962zm.9621 2.8863H4.0922v-.9621h1.7286zm-2.4787 0H.5291v-.9621h2.813zM.5291.7697h.9622v.9621H.5292zm1.5166 0h3.7751v.9621H2.0457zM.5292 2.6939h2.5683v.9622H.5292z'/%3E%3C/svg%3E");
+}
+
+.gh-link-wrapper {
+  padding: 30px 0;
+}
+
+.gh-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  > span {
+    font-family: 'Galano', sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    color: #fff;
+    margin-left: 8px;
+  }
+}
