@@ -22,16 +22,15 @@ class Debounce extends Component {
   constructor (props) {
     super(props)
 
-    this.canUpdate = !this.props.immediate
+    this.canUpdate = !props.immediate
   }
 
-  componentWillReceiveProps () {
-    this.canUpdate = false
+  componentWillUpdate () {
     this.debounce()
   }
 
   shouldComponentUpdate () {
-    return false
+    return this.canUpdate
   }
 
   componentWillUnmount () {
