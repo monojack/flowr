@@ -5,20 +5,29 @@ import { isFunction, isPromise, warn, } from './utils'
 
 class Await extends Component {
   componentDidMount () {
-    this.done = false
+    this.mounted = true
     this.request(this.props)
   }
 
   componentWillReceiveProps (nextProps) {
-    this.done = false
     this.request(nextProps)
   }
 
+  shouldComponentUpdate () {
+    return false
+  }
+
+  componentWillUnmount () {
+    this.mounted = false
+  }
+
   ongoing = null
-  done = false
-  state = { resolve: null, reject: null, }
+  resolve = null
+  reject = null
 
   request = props => {
+    if (!this.mounted) return
+
     const { 'for': forProp, onPromise = () => {}, } = props
 
     let promise
@@ -36,49 +45,47 @@ class Await extends Component {
     }
 
     if (!promise) {
-      this.done = true
-      return this.setState({
-        resolve: null,
-        reject: null,
-      })
+      this.resolve = null
+      this.reject = null
     }
 
     this.ongoing = promise
     promise.then(
       res => {
-        if (this.ongoing !== promise) return
+        if (this.ongoing && this.ongoing !== promise) return
         this.update(null, res)
       },
       err => {
-        if (this.ongoing !== promise) return
+        if (this.ongoing && this.ongoing !== promise) return
         this.update(err, null)
       }
     )
   }
 
   update = (reject, resolve) => {
+    if (!this.mounted) return
+
     const { tap = () => {}, } = this.props
-    this.done = true
     tap(reject, resolve)
-    this.setState({
-      done: true,
-      resolve,
-      reject,
-    })
+
+    this.resolve = resolve
+    this.reject = reject
     this.ongoing = null
+
+    this.forceUpdate()
   }
 
   render () {
     const { children, 'for': forProp, } = this.props
-    const { resolve, reject, } = this.state
+    const { resolve, reject, } = this
 
-    if (!this.done) return null
+    if (!resolve && !reject) return null
 
     if (isFunction(children)) {
       return forProp ? children(reject, resolve) : null
-    } else if (isPromise(children)) {
-      return reject == null ? children : null
     }
+
+    return !reject ? children : null
   }
 }
 
